@@ -3,6 +3,8 @@ import os
 
 img = Image.open('Mona1.jpg')
 
+img = img.convert("L")
+
 img_bytes = img.tobytes()
 
 print(img_bytes[1])
@@ -10,10 +12,10 @@ print(img_bytes[1])
 bytelist = []
 
 for byte in img_bytes:
-    if byte > 200:
-        byte = 50
+    if byte > 150:
+        byte = 255
     else:
-        byte = 245
+        byte = 0
     bytelist.append(byte)
 
 img_bytes_new = bytes(bytearray(bytelist))
