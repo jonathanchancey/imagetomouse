@@ -1,6 +1,8 @@
 from PIL import Image
 import os 
 
+import numpy as np
+
 img = Image.open('Mona1.jpg')
 
 img = img.convert("L")
