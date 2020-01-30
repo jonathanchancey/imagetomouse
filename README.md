@@ -9,3 +9,5 @@ currently we have an input image such as this
 transformed into mouse movements and clicks  
 
 ![](starry.png)
+
+this example was testing with various image res/spacing and brush sizes in microsoft paint
