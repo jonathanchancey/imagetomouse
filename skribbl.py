@@ -4,17 +4,23 @@ import numpy as np
 from pynput.mouse import Button, Controller
 import time 
 
+IMAGERESDIV = 20
+
+IMAGESPACING = 4
 
 def imageToList(imagename):
     img = Image.open(imagename) # opens the image as RGB
     img = img.convert("L") # converts the image to 8-bit pixels, black and white
-    img = img.resize((374, 300))
+    imgsize0 = int(img.size[0]/IMAGERESDIV)
+    imgsize1 = int(img.size[1]/IMAGERESDIV)
+    
+    img = img.resize((imgsize0, imgsize1))
     img_bytes = img.tobytes() 
     
     
     bytelist = []
     for byte in img_bytes:
-        if byte > 150:
+        if byte > 100:
             byte = 255
         else:
             byte = 0
@@ -46,25 +52,39 @@ def mouseMover(npr):
 
     # og_mpos = mouse.position()
 
+
+    # TODO swap x and y because they're swapped
     for x in range(len(npr)):
-        if (x % 5 == 0):
-            for y in range(len(npr[x])):
-                
-                # mouse.move(og_mpos[0] + npr[x,y], og_mpos[0] + npr[x])
-                mouse.move(1,0) # move the mouse down 1 pixel on the y axis
-
-                if (y % 5 == 0):
-                    if (npr[x][y] == 0):
-                        print("x,y = {},{}".format(x,y))
-                        mouse.click(Button.left, 1)
-            resetxunitsback = -1 * len(npr[x])
-            mouse.move(resetxunitsback, 5) # move the mouse down 1 pixel on the x axis
+        for y in range(len(npr[x])):
+            mouse.move(IMAGESPACING,0) # move the mouse right 1 pixel on the x axis
+            if (npr[x][y] == 0):
+                # print("x,y = {},{}".format(x,y))
+                mouse.click(Button.left, 1)
+        
+        resetxunitsback = -1 * int(len(npr[x])*IMAGESPACING)
+        mouse.move(resetxunitsback, IMAGESPACING) 
 
 
+
+
+
+    # # swap x and y because they're swapped
+    # for x in range(len(npr)):
+    #     if (x % 5 == 0):
+    #         for y in range(len(npr[x])):
+    #             mouse.move(1,0) # move the mouse right 1 pixel on the x axis
+
+    #             if (y % 5 == 0):
+    #                 if (npr[x][y] == 0):
+    #                     print("x,y = {},{}".format(x,y))
+    #                     mouse.click(Button.left, 1)
+    #         resetxunitsback = -1 * len(npr[x])
+    #         mouse.move(resetxunitsback, 5) 
 
 
 if __name__ == '__main__':
-    npr = imageToList('Mona1.jpg')
+    # npr = imageToList('Mona1.jpg')
+    npr = imageToList('starrynight.jpg')
     mouseMover(npr)
 
 
