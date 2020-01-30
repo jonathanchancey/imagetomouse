@@ -47,17 +47,18 @@ def mouseMover(npr):
     # og_mpos = mouse.position()
 
     for x in range(len(npr)):
-        for y in range(len(npr[x])):
-            
-            # mouse.move(og_mpos[0] + npr[x,y], og_mpos[0] + npr[x])
-            mouse.move(0,1) # move the mouse down 1 pixel on the y axis
+        if (x % 5 == 0):
+            for y in range(len(npr[x])):
+                
+                # mouse.move(og_mpos[0] + npr[x,y], og_mpos[0] + npr[x])
+                mouse.move(1,0) # move the mouse down 1 pixel on the y axis
 
-            if (y % 5 == 0):
-                if (npr[y][x] == 0):
-                    print("x,y = {},{}".format(x,y))
-                    mouse.click(Button.left, 1)
-        resetheight = -1 * len(npr[x])
-        mouse.move(1, resetheight) # move the mouse down 1 pixel on the x axis
+                if (y % 5 == 0):
+                    if (npr[x][y] == 0):
+                        print("x,y = {},{}".format(x,y))
+                        mouse.click(Button.left, 1)
+            resetxunitsback = -1 * len(npr[x])
+            mouse.move(resetxunitsback, 5) # move the mouse down 1 pixel on the x axis
 
 
 
