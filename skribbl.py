@@ -5,8 +5,10 @@ from pynput.mouse import Button, Controller
 import time 
 
 IMAGERESDIV = 20
-
 IMAGESPACING = 4
+
+# TODO add invert option
+# TODO add gui with options and preview
 
 def imageToList(imagename):
     img = Image.open(imagename) # opens the image as RGB
@@ -20,7 +22,7 @@ def imageToList(imagename):
     
     bytelist = []
     for byte in img_bytes:
-        if byte > 100:
+        if byte > 180:
             byte = 255
         else:
             byte = 0
@@ -64,9 +66,11 @@ def mouseMover(npr):
         resetxunitsback = -1 * int(len(npr[x])*IMAGESPACING)
         mouse.move(resetxunitsback, IMAGESPACING) 
 
+def convertToFauxcode(npr):
+    pass
 
-
-
+def runFauxcode(npr):
+    pass
 
     # # swap x and y because they're swapped
     # for x in range(len(npr)):
@@ -84,7 +88,7 @@ def mouseMover(npr):
 
 if __name__ == '__main__':
     # npr = imageToList('Mona1.jpg')
-    npr = imageToList('starrynight.jpg')
+    npr = imageToList('image.jpg')
     mouseMover(npr)
 
 
