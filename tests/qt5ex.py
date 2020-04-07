@@ -13,8 +13,8 @@ class Window(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
 
+        self.setWindowTitle("Mouse Matrix Printer")
         self.setMinimumSize(QSize(484, 180))
-        self.setWindowTitle("Matriks Printer")
 
         centralWidget = QWidget(self)
         self.setCentralWidget(centralWidget)
@@ -40,7 +40,7 @@ class Window(QMainWindow):
         slider.setRange(0,255)
         slider.setValue(200)
         slider.setTickPosition(QSlider.TicksAbove)
-        slider.valueChanged.connect(self.changedValue)
+        slider.valueChanged.connect(self.changed_value)
         # slider.setAlignment()
         gridLayout.addWidget(slider,2,0)
 
@@ -54,13 +54,16 @@ class Window(QMainWindow):
         # filterCutOffLabel.ItemIsEditable(true)
 
 
-    def changedValue(self):
-        size = str(self.slider.value())
-        self.lineEdit.setText(size)
+    def changed_value(self):
+        print("in changedValue")
+        # size = str(self.slider.value())
+        # self.lineEdit.setText(size)
 
-
-if __name__ == "__main__":
+def main():
     app = QtWidgets.QApplication(sys.argv)
     mainWin = Window()
     mainWin.show()
     sys.exit(app.exec_())
+
+if __name__ == "__main__":
+    main()
